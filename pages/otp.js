@@ -1,38 +1,37 @@
-// pages/signup.js
+// pages/otp.js
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 
-const Signup = () => {
-  const [email, setEmail] = useState('');
+const OTPVerification = () => {
+  const [otp, setOtp] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulated API call for sending OTP
-    console.log('Sending OTP to:', email);
+    // Simulated API call for OTP verification
+    console.log('Verifying OTP:', otp);
     setTimeout(() => {
       setIsSubmitting(false);
-      router.push('/otp'); // Navigate to the OTP Verification page
+      alert('OTP Verified!'); // Replace this with actual navigation or success handling
     }, 1000);
   };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
       <form onSubmit={handleSubmit} className="w-50 p-3 border rounded">
-        <h1 className="text-center">Sign Up</h1>
+        <h1 className="text-center">Verify OTP</h1>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email Address
+          <label htmlFor="otp" className="form-label">
+            Enter OTP
           </label>
           <input
-            type="email"
-            id="email"
+            type="text"
+            id="otp"
             className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            maxLength={6}
             required
           />
         </div>
@@ -41,11 +40,11 @@ const Signup = () => {
           className="btn btn-primary w-100"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Sending OTP...' : 'Send OTP'}
+          {isSubmitting ? 'Verifying...' : 'Verify OTP'}
         </button>
       </form>
     </div>
   );
 };
 
-export default Signup;
+export default OTPVerification;
